@@ -15,12 +15,10 @@ class Vocabulary:
         Path to the CSV file which contains the dataset
     file_path: str
         Path/name of the txt file that will have the vocabulary
-    spell_checker: SpellChecker
-        Object to re-write those words that are not spelled correctly
-    stemmer: PorterStemmer
-        Object to reduce an inflected word down to its word stem
-    lemmatizer: WordNetLemmatizer
-        Object to reduce inflected words to their root word
+    stemming: bool
+        True to stem all the words
+    lemmatization: bool
+        True to lemmatize all the words
     """
     def __init__(self, csv_file_path: str, file_path: str = output_folder_path + "vocabulario.txt", stemming: bool = True, lemmatization: bool = False):
         """
@@ -69,8 +67,8 @@ class Vocabulary:
         vocabulary_keys.sort()
         vocabulary_sorted = {i: self.vocabulary[i] for i in vocabulary_keys}
         vocabulary = vocabulary_sorted
-        print('Start writing to file')
         # Write to file
+        vocabulary_file.write(len(vocabulary))
         for word in vocabulary:
             vocabulary_file.write(word)
             vocabulary_file.write('\n')

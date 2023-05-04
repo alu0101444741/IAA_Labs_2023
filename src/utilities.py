@@ -30,9 +30,9 @@ def create_test_csv(rows: int):
     test_csv = csv_file[rows:len(csv_file)]
     return(test_csv)
 
-def create_fixed_csv():
-    csv_file = pd.read_csv('./input/F75_train.csv', sep=",")
-    news = pd.DataFrame({'News': csv_file.iloc[:, 0], 'Classification': csv_file.iloc[:, 1]})
+def create_fixed_csv(file_path: str):
+    csv_file = pd.read_csv(file_path, sep=",")
+    news = pd.DataFrame({'News': csv_file.iloc[:, 0], 'Classification': []})
     first_useless_row = -1
     for i in range(0, len(news)):
         if ((type(news['News'][i]) is float) and (math.isnan(float(news['News'][i])))):
@@ -40,7 +40,8 @@ def create_fixed_csv():
             break
     if (first_useless_row != -1):
         news = news.drop(index = range(first_useless_row, len(news)))
-        news.to_csv('./input/F75_train_FIXED.csv', index = False)
+        new_path = file_path[0:-5] + '_FIXED' + file_path[-1:-4]
+        news.to_csv(new_path, index = False)
 
 def create_corpus_from_file(file_path: str):
     """

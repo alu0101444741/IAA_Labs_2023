@@ -4,13 +4,9 @@
 
 """
 import time
-from functions import csv_main_file, K_value
+from utilities import create_fixed_csv
+from functions import csv_main_file, input_folder_path, pd
 from classification import split_csv, create_language_models, classify_all, compute_accuracy, summary_file_path
-
-# Creating train and test sets.
-# Time: 0min 2s
-#train_set_path, test_set_path = csv_main_file, csv_main_file # F75_train
-train_set_path, test_set_path = split_csv(csv_main_file, 0.8) # F75_train_1, F75_train_2
 
 def test_model(train_set_path, test_set_path):
     models = create_language_models(train_set_path)
@@ -37,10 +33,23 @@ def test_model_timed(train_set_path, test_set_path):
     print('Acc.: ' + str(compute_accuracy(test_set_path, summary_file_path)) + '%')
     print('* Time: ' + str(round(time.time() - start_time, 2)) + ' sec.')
 
-print('K = ' + str(K_value))
+# Creating train and test sets.
+# Time: 0min 2s
+#train_set_path, test_set_path = csv_main_file, csv_main_file # F75_train
+#train_set_path, test_set_path = split_csv(csv_main_file, 0.8) # F75_train_1, F75_train_2
+
+# Evaluation train and test sets.
+evaluation_test = input_folder_path + 'F75_test_no_clase_FIXED.csv'
+train_set_path, test_set_path = csv_main_file, evaluation_test
+
+# Testing F75_train
 # F75_train
-print('Primer caso')
-test_model(csv_main_file, csv_main_file)
+# print('Primer caso')
+# test_model(csv_main_file, csv_main_file)
 # F75_train_1, F75_train_2
-print('Segundo caso')
+# print('Segundo caso')
+# test_model(train_set_path, test_set_path)
+
+# Create a new csv with header: News, Classification
+# create_fixed_csv(evaluation_test)
 test_model(train_set_path, test_set_path)

@@ -8,7 +8,7 @@ import math
 # from vocabulary import Vocabulary
 from corpus import Corpus, create_corpuses_efficiently
 from language_model import LanguageModel
-from functions import preprocess_token, input_folder_path, output_folder_path, vocabulary_path, csv_main_file, classes, pd, math, nltk
+from functions import preprocess_token, input_folder_path, output_folder_path, vocabulary_path, pd, nltk
 
 # Program constants
 train_set_path = input_folder_path + 'F75_train_1.csv'
